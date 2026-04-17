@@ -1,3 +1,4 @@
+import os  
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
@@ -6,7 +7,8 @@ import uuid
 from typing import List
 
 
-mlflow.set_tracking_uri("http://localhost:5001")
+TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI", "http://localhost:5001")
+mlflow.set_tracking_uri(TRACKING_URI)
 
 
 app = FastAPI()
